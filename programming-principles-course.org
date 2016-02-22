@@ -1,0 +1,493 @@
+#+TITLE: Programming Principles Course Outline
+
+[FYI For Reviewers: the source of this file is an Emacs .org file. If
+you make changes, please make them obvious! :D]
+
+* Philosophies of Development
+  - DRY (Don't Repeat Yourself)
+  - Law of Demeter (Principle of Least Knowledge) (lowest coupling)
+  - POLA (Principle of Least Astonishment) (or Least Surprise) -
+    Things work as the user expects them to.
+    - users are part of the system.
+    - design should match their expectations, experience, and mental
+      models
+    - AKA: "Don't piss off the user"
+  - Seek patterns to learn from
+  - Correct, Pretty, then Fast
+
+
+** Patterns
+
+   The term "Patterns" has emerged in the last couple of decades to
+   refer to something folks have recognized as something that happens
+   over and over, and can be both positive and negative (although
+   negative patterns are often referred to as an "Antipattern" to
+   distinguish the ones you should *stop* doing from those you should
+   start doing).
+
+
+* Standard Practices
+  - plan your work
+    - involve your users in the planning
+  - test your work
+    - involve your users in the testing
+  - organize your work
+  - manage your source code
+  - manage your documentation
+  - keep multiple backups in different locations
+  - track progress toward deadlines
+  - use (and write) tools
+  - avoid premature optimization
+  - build what you know you need (YAGNI - You Ain't Gonna Need It)
+  - plan contingencies
+  - own up to mistakes and errors
+    - offer options
+
+
+** Resources
+
+*** Programming Proverbs
+
+    [[http://swaac.tamouse.org/programming/2015/08/28/ledgards-programming-proverbs/][Programming Proverbs Post]]
+
+
+* Involve your users
+  - early and often
+  - shut up and listen, then listen some more
+
+
+* Programming is Problem Solving
+  - Define the Problem
+  - Break the problem down into solvable pieces
+    - Top Down Design
+  - Find the core of the solution, do that first
+  - Write tests first and use a REPL to explore
+  - Refactor
+
+
+** DRY - Don't Repeat Yourself
+   - applies equally to HTML, CSS, and JavaScript (and other programming lanugages)
+   - apply it to your daily life with the computer
+
+*** Modularity
+    - Orthogonality
+    - High Cohesion
+    - Low Coupling - Law of Demeter, Principle of Least Knowledge
+      https://en.wikipedia.org/wiki/Law_of_Demeter
+
+      Implement "shy" modules -- don't interact with many things, keep their insides secret.
+
+*** Refactoring
+    - changing the internals of code to make it more maintainable,
+      reusable, performant, easier to understand, withOUT changing it's
+      external interface and observable behaviour, i.e., it's /contract/.
+    - can be a complex subject all on it's own
+    - see also "Restructuring" -- another way of cleaning up code.
+      - refactoring: in-the-small
+      - restructuring: in-the-large
+
+** TDD - Test Driven Development
+   - red / green / refactor
+   - make your code easy to test by starting with testing
+
+** RDD - REPL Driven Development
+
+
+
+* Keep learning, and document your learning
+  - practice
+  - dev blog
+  - journal (paper*, evernote, word, a text file in your
+    editor-of-choice)
+    - *Paper and Pen is actually *really* convenient when you're also
+      working on a web page, so you don't have to shift context on the
+      screen to jot down a note. You don't have think how you want to
+      express your idea, you just scribble it down. Mind Maps,
+      scribbles, little paper designs, thoughts, etc. - paper is a lot
+      easier to use and it's something you already know how to do.
+    - WHile you're working, it's also great to do screenshots of
+      things you're wondering about. I recommend a tool called
+      "Skitch" that works with Evernote to grab a screen shot, then
+      you can annotate it easily, too, and save it to your Evernote.
+
+* Tools -- Use them, make your own
+  - the computer is the ultimate servant.
+  - automate away repetitive tasks.
+  - tasks that have many steps and must be done in order.
+  - one-liners.
+
+** Source code control
+   - Git, Github
+   - branching, merging
+   - branches are for experiments, too
+   - gitflow
+
+** Command line: bash and friends
+   - plain text transforms, the unix pipeline
+   - adding your own: aliases and functions
+
+** Little programs: scripts
+   - oneliners: [[https://commandlinefu.com][Command-line Fu]]
+     - e.g. remove execute permission, downcase file names, remove spaces:
+       #+BEGIN_SRC shell-script
+         for f in *;do chmod -x "$f" ; mv "$f" "$(echo "$f"|tr 'A-Z' 'a-z'|sed s/ +/_/g)" ; done
+       #+END_SRC
+     - e.g. convert a batch of images to 100x100 thumbnails:
+       #+begin_src shell-script
+         mkdir -p thumbs && \
+             mogrify -format gif -path thumbs -thumbnail 200x200^ \
+                 -gravity center -extent 200x200 *.jpg *.jpeg *.png *.gif
+       #+end_src
+     - e.g. see if postgresql is running:
+       #+BEGIN_SRC shell-script
+         ps auxww | grep -v grep | grep postgres
+       #+END_SRC
+
+   - scripting languages: bash, perl, python, ruby, javascript
+     (w/Node.js installed)
+     - [[https://pragprog.com/book/rmtpruby/text-processi][Text Processing with Ruby]] - Rub Miller
+
+** A little bit bigger: command line applications
+*** Task runners: Make, Rake, NPM, Gulp, Grunt, etc.
+    - superb at repetitive tasks, like "run all the tests", "build the
+      site", "create a distribution", "deploy the site"
+*** Generators: Yoman, Thor
+    - superb at creating boilerplate content, project skeletons,
+      startup projects
+** Source Editors
+   - Modern GUI: sublime text, atom, brackets, light table, geany, notepad++, etc
+   - IDEs: WebStorm, PHPStorm, RubyMine, etc
+     - do more than let you edit code, also do debugging, manage
+       souce, run tests, refactor and reformat your code, and a host
+       of other things. The "I" stands for "Integrated".
+   - Traditional: Emacs, Vim, etc
+   - nice features, learn to use
+     - snippets and templates
+     - entry prompts
+     - generators
+     - task control
+     - syntax checking, fixing
+
+*** Spend time learning how to use your editor!
+    - go beyond the basics
+    - learn keyboard shortcuts
+    - learn about extensions and install packages
+    - youtube videos provide lots of instruction!
+    - learn how to speed up your overall development and learning
+    -
+
+** Source Managers
+   - SourceTree
+   - Github Desktop
+
+** Deploying: how to get your work where it can be seen
+   - FTP? maybe not
+   - automate
+   - using Git to deploy
+     - need a remote bare repo to push to
+     - post-recieve hooks to checkout the latest to the actual site dir
+
+
+
+* Libraries, Frameworks
+  - you can't write everything yourself
+  - reuse
+  - study them, learn about them, do little things to learn about them
+
+
+** Libraries
+   - built-in aka runtime
+   - standard extensions, usually packaged with system, but you have
+     to explicitly import / include
+   - external -- huge collections of packages others have writen that
+     become more and more specialized
+
+** Frameworks
+   - a sort of library that has distinct opinions about how you
+     organize and implement your stuff
+   - speed up the process of developing and testing by doing a lot for
+     you
+
+
+* Other stuff?
+  - Domains, DNS, Hosting
+
+
+* Command Line orientation
+
+  This is really about learning to keep your hands on the
+  keyboard. You will work faster and more precisely than you will if
+  you jump back and forth between keyboard and mouse.
+
+  Working from the command line to manipulate project files and
+  directories can become quite fast and intuitive.
+
+  Using command line tools can replace repetitive click-and-update
+  tasks.
+
+  GUIs are still great for things which require a more visual focus
+  and physical manipulation. They also provide more helpful guidance
+  when you have complex, step-wise, but not oft-repeated tasks.
+
+
+* File system orientation
+
+  In development, the organization, naming, and placement of project
+  components is crucial to effective development. Know where to place
+  your project files, and how to name folders/directories
+  meaningfully.
+
+** Top-level Organization
+
+   How I like to organize things.
+
+   In a typical system, there are often a few directories already
+   created for you, such as
+
+   - Documents
+   - Downloads
+   - Pictures
+   - Movies
+   - Desktop
+
+   and so on.
+
+   For my development stuff, I leave all that as is, and create a few
+   new top-level directories:
+
+   - Projects -- my personal projects, learning examples, and general
+     stuff I do for development
+   - Sites -- web sites I'm working on. At least on the Mac, Sites is
+     often also used for web sites local to the Mac. This generally
+     shouldn't be a problem.
+   - Work -- client-associated projects
+
+   Finally, I add a special directory to keep Git "remote"
+   repositories  that I don't want to put on Github for privacy
+   reasons:
+
+   - _Repos - note that I've prefixed that directory with an
+     underscore "_". This is to remind me that this is a special
+     directory I shouldn't usually be doing anything with. The
+     directories under here are "bare" Git repos, which are
+     essentially remotes for some of my personal things. (Yes, most
+     everything I do is under source control, with the notable
+     exceptions of larger media files (images, audios, videos).)
+
+
+
+*** Projects Organization
+
+    I have tended to group my Project directory by technology, for
+    example, `~rubystuff~', `~javascriptstuff~', and so on. I'm not
+    sure how I started calling everything "stuff" but it seems to work
+    for me. But *you* do *you*!
+
+    My Projects directory also has subdirectories for things like
+    `~FrontendMasters~' classes, `~GDI~' classes, and so on, which
+    helps me find them easily.
+
+    Frankly, it's been organized somewhat organically over the
+    years. I've been learning a long time, and I don't even know
+    everything that is in there.
+
+*** Sites Organization
+
+    This is where I work on various web sites that I am
+    publishing. (There's a wee bit of an overlap between some things
+    here and Projects, but you'd be better off keeping things clean, I
+    think.)
+
+    Subdirectories are organized by domain name, so:
+
+    - tamouse.org
+    - pontiki.io
+    - rails.mn
+    - gandimouse
+    - tamouse.github.io
+    - test
+
+    Further subdirectories are named after the full site name, for
+    example the `~tamouse.org~' domain has my personal sites:
+
+    - art.tamouse.org
+    - blog.tamouse.org
+    - recipes.tamouse.org
+    - resume.tamouse.org
+    - swaac.tamouse.org
+    - www.tamouse.org
+
+    In addition, because I want to be able to blog stuff to the
+    various sites, but also develop them further (new layouts,
+    designs, etc.), I have a subdirectory called `~Development~' that
+    mirrors this directory, but the repos are on different branches
+    for development.
+
+*** Work Organization
+
+    You must do this how you prefer, of course. My sense of order has
+    a directory for each client:
+
+    - AckmannDickenson
+    - NOVU
+    - Target
+    - BestBuy
+    - Others - these are generally folks with brief contracts,
+      one-shot deals, or inquiries that don't qualify a whole area of
+      their own.
+
+    In addition, I have some directories for managing my business.
+
+    - incorporation
+    - forms
+    - taxes
+
+    In each client directory, there are usually these further
+    directories:
+
+    - documents
+    - invoices
+
+    Then project directories:
+
+    - Brewtoad
+      - documents - a place to keep documentation and information that
+        isn't in a form suitable for the repo's github wiki
+      - brewtoad - the repo
+      - brewtoad.wiki - the github wiki
+      - misc - just a place to keep random info about the project that
+        accumulates.
+
+
+** Anatomy of a project
+
+   In a typical web site project, you'll often find a structure like
+   the following:
+
+   #+begin_src
+   web_site/
+     css/
+       styles.css
+     js/
+       main.js
+       vendor/
+         jquery.min.js
+     img/
+       logo.png
+     index.html
+     pages/
+       about.html
+       contact.html
+   #+end_src
+
+   The web site's root contains the index page, while all the other
+   parts of the site are in folders (aka directories). Folders can be
+   further broken into sub-folders, and so on.
+
+   The way you lay out your project aids greatly from using top-down
+   design, modularity, and keeping components small. A balancing
+   factor to this is that you do not want your project structure to go
+   too deep, either, as this makes it harder to remember where things
+   are. Strike a useful balance; a good rule of thumb is never go more
+   than 3 levels down, e.g. ~css/theme/components/~.
+
+
+* Static Sites
+  A better way of creating stand-alone web sites.
+
+  - Templating systems
+  - Combining pieces so you can stay DRY
+  - Easier to start a new site with boilerplate
+
+** Languages
+   - Ruby: [[http://jekylrb.com][Jekyll]], [[http://minutemanapp.com][MinuteMan]]
+   - Python: [[http://blog.getpelican.com][Pelican]]
+   - JavaScript: [[http://hexo.io][Hexo]], [[http://metalsmith.io][MetalSmith]]
+   - PHP: [[https://getgrav.org/][GetGrav]]
+   - [[https://staticsitegenerators.net/][List of Static Site Generators]]
+
+
+
+** MetalSmith
+   Since we are already learning JavaScript, let's go with JavaScript!
+
+   - install
+   - setup
+   - convert existing site
+   - edit / serve / test / debug
+   - build / deploying
+
+
+* Server side / Back end
+
+** Languages
+   - PHP
+   - Ruby
+   - Python
+   - Perl
+   - Javascript (w/Node.js)
+
+** Frameworks
+*** PHP
+    - Wordpress (actually a full up CMS)
+    - Drupal (CMS)
+    - Joomla (CMS)
+    - Laravel
+    - Symfony2
+
+*** Ruby
+    - Rails
+    - Sinatra
+
+*** Python
+    - Django
+
+*** Perl
+
+*** Javascript (Node.js)
+    - Express
+    - Hoodie (Service)
+    - Meteor (goes all the way from the database backend to the very
+      front edge of the browser client)
+    -
+
+
+* What about Windows Development?
+
+  This is a question I get a lot, because almost all the development I
+  have done and taught is based on open-source tools, which are pretty
+  much focused on Unix and it's derivatives (GNU/Linux, Mac OSX,
+  BSD).
+
+  Windows has it's own rich development resources, including
+  Visual Studio, C#, and so on. All the remarks regarding "command
+  line orientation" though, don't seem to apply.
+
+  But most web sites are deployed on Unix-derivative servers and
+  there is much to be gained from developing in a system at least
+  similar to the way the site will run on it's own.
+
+  Additionally, if you're wishing to develop using modern web
+  development environments in Ruby, PHP, Node (server-side
+  javascript), which include a lot of libraries, tools, and (probably
+  most important) vital and active communities where you can get
+  questions answered, Windows might not serve your needs.
+
+  If you are pretty much set on using a windows machine, I have a few
+  of suggestions for you:
+
+  - Use a set of windows-native tools such as Cygwin or MingW to give
+    you a similar command line and tooling experience. If you have
+    installed a package like Git-bash or RailsInstaller, those use
+    such a tools set underneath.
+
+  - Install a virtual desktop on your PC with VirtualBox. You can put
+    a full GNU/Linux desktop such as Linux Mint on your PC and get the
+    experience of developing in Linux.
+
+  - Install a virtual server on your PC with VirtualBox. This is
+    a "split development" situation: you'll use your windows machine
+    to edit and manage the source files, but the virtual server with
+    run and serve the website.
+
+  - Using a cloud-based development environment such as [[https://c9.io][Cloud 9]].
